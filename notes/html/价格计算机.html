@@ -1,135 +1,31 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>返还金额计算器</title>
-    <style>
-        .calculator {
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-        .calculator h3 {
-            text-align: center;
-            color: #2d3748;
-            margin-bottom: 1.5rem;
-        }
-        .input-group {
-            margin-bottom: 1.2rem;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #4a5568;
-            font-size: 0.95rem;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-        .input-group input:focus {
-            outline: none;
-            border-color: #4299e1;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-        }
-        .result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
-        .result p {
-            margin: 0.5rem 0;
-            color: #2d3748;
-            font-size: 1rem;
-        }
-        .result span {
-            font-weight: 600;
-            color: #4299e1;
-        }
-        /* 友情链接按钮样式 */
-        .friend-link {
-            margin-top: 2rem;
-            text-align: center;
-        }
-        .link-btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: #4299e1;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .link-btn:hover {
-            background-color: #3182ce;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
-        }
-        .link-btn:active {
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加密页面</title>
+<style>body{margin:0;background:#fafcff;}</style>
 </head>
 <body>
-    <div class="calculator">
-        <h3>返还金额计算器</h3>
-        <div class="input-group">
-            <label for="originalAmount">原始金额（元）</label>
-            <input type="number" id="originalAmount" placeholder="例如：26.8" step="0.01" min="0">
-        </div>
-        <div class="input-group">
-            <label for="returnRate">返还比例（%）</label>
-            <input type="number" id="returnRate" placeholder="例如：5" step="0.01" min="0" max="100">
-        </div>
-        <div class="result">
-            <p>返还金额：<span id="returnAmount">0.00</span> 元</p>
-            <p>实际支付金额：<span id="actualPayment">0.00</span> 元</p>
-        </div>
-        <!-- 友情链接按钮 -->
-        <div class="friend-link">
-            <a href="https://yy-ds.neocities.org/" target="_blank" class="link-btn">访问友情链接</a>
-        </div>
-    </div>
-
-    <script>
-        // 获取DOM元素
-        const originalAmountInput = document.getElementById('originalAmount');
-        const returnRateInput = document.getElementById('returnRate');
-        const returnAmountSpan = document.getElementById('returnAmount');
-        const actualPaymentSpan = document.getElementById('actualPayment');
-
-        // 计算逻辑函数
-        function calculate() {
-            // 获取输入值（默认0，避免NaN）
-            const originalAmount = parseFloat(originalAmountInput.value) || 0;
-            const returnRate = parseFloat(returnRateInput.value) || 0;
-
-            // 核心计算（返还比例转小数：% → 除以100）
-            const returnAmount = (originalAmount * returnRate / 100).toFixed(2); // 保留2位小数
-            const actualPayment = (originalAmount - returnAmount).toFixed(2);
-
-            // 更新结果显示
-            returnAmountSpan.textContent = returnAmount;
-            actualPaymentSpan.textContent = actualPayment;
-        }
-
-        // 输入框变化时实时计算
-        originalAmountInput.addEventListener('input', calculate);
-        returnRateInput.addEventListener('input', calculate);
-    </script>
+<script>
+(function(){
+    const encoded = 'PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InpoLUNOIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+6L+U6L+Y6YeR6aKd6K6h566X5ZmoPC90aXRsZT4KICAgIDxzdHlsZT4KICAgICAgICAuY2FsY3VsYXRvciB7CiAgICAgICAgICAgIG1heC13aWR0aDogNTAwcHg7CiAgICAgICAgICAgIG1hcmdpbjogMnJlbSBhdXRvOwogICAgICAgICAgICBwYWRkaW5nOiAycmVtOwogICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCAjZTBlMGUwOwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiAxMnB4OwogICAgICAgICAgICBib3gtc2hhZG93OiAwIDJweCAxMHB4IHJnYmEoMCwwLDAsMC4wNSk7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICJTZWdvZSBVSSIsIHNhbnMtc2VyaWY7CiAgICAgICAgfQogICAgICAgIC5jYWxjdWxhdG9yIGgzIHsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgICAgICBjb2xvcjogIzJkMzc0ODsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMS41cmVtOwogICAgICAgIH0KICAgICAgICAuaW5wdXQtZ3JvdXAgewogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAxLjJyZW07CiAgICAgICAgfQogICAgICAgIC5pbnB1dC1ncm91cCBsYWJlbCB7CiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAwLjVyZW07CiAgICAgICAgICAgIGNvbG9yOiAjNGE1NTY4OwogICAgICAgICAgICBmb250LXNpemU6IDAuOTVyZW07CiAgICAgICAgfQogICAgICAgIC5pbnB1dC1ncm91cCBpbnB1dCB7CiAgICAgICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgICAgICBwYWRkaW5nOiAwLjhyZW07CiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNkZWUyZTY7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDZweDsKICAgICAgICAgICAgZm9udC1zaXplOiAxcmVtOwogICAgICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94OwogICAgICAgIH0KICAgICAgICAuaW5wdXQtZ3JvdXAgaW5wdXQ6Zm9jdXMgewogICAgICAgICAgICBvdXRsaW5lOiBub25lOwogICAgICAgICAgICBib3JkZXItY29sb3I6ICM0Mjk5ZTE7CiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMCAwIDNweCByZ2JhKDY2LCAxNTMsIDIyNSwgMC4xKTsKICAgICAgICB9CiAgICAgICAgLnJlc3VsdCB7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDEuNXJlbTsKICAgICAgICAgICAgcGFkZGluZzogMXJlbTsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogOHB4OwogICAgICAgIH0KICAgICAgICAucmVzdWx0IHAgewogICAgICAgICAgICBtYXJnaW46IDAuNXJlbSAwOwogICAgICAgICAgICBjb2xvcjogIzJkMzc0ODsKICAgICAgICAgICAgZm9udC1zaXplOiAxcmVtOwogICAgICAgIH0KICAgICAgICAucmVzdWx0IHNwYW4gewogICAgICAgICAgICBmb250LXdlaWdodDogNjAwOwogICAgICAgICAgICBjb2xvcjogIzQyOTllMTsKICAgICAgICB9CiAgICAgICAgLyog5Y+L5oOF6ZO+5o6l5oyJ6ZKu5qC35byPICovCiAgICAgICAgLmZyaWVuZC1saW5rIHsKICAgICAgICAgICAgbWFyZ2luLXRvcDogMnJlbTsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgIH0KICAgICAgICAubGluay1idG4gewogICAgICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7CiAgICAgICAgICAgIHBhZGRpbmc6IDAuOHJlbSAycmVtOwogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDI5OWUxOwogICAgICAgICAgICBjb2xvcjogI2ZmZjsKICAgICAgICAgICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA4cHg7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMXJlbTsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDUwMDsKICAgICAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgZWFzZTsKICAgICAgICAgICAgYm9yZGVyOiBub25lOwogICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICAgICAgfQogICAgICAgIC5saW5rLWJ0bjpob3ZlciB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICMzMTgyY2U7CiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtMnB4KTsKICAgICAgICAgICAgYm94LXNoYWRvdzogMCA0cHggMTJweCByZ2JhKDY2LCAxNTMsIDIyNSwgMC4yKTsKICAgICAgICB9CiAgICAgICAgLmxpbmstYnRuOmFjdGl2ZSB7CiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgwKTsKICAgICAgICB9CiAgICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgogICAgPGRpdiBjbGFzcz0iY2FsY3VsYXRvciI+CiAgICAgICAgPGgzPui/lOi/mOmHkemineiuoeeul+WZqDwvaDM+CiAgICAgICAgPGRpdiBjbGFzcz0iaW5wdXQtZ3JvdXAiPgogICAgICAgICAgICA8bGFiZWwgZm9yPSJvcmlnaW5hbEFtb3VudCI+5Y6f5aeL6YeR6aKd77yI5YWD77yJPC9sYWJlbD4KICAgICAgICAgICAgPGlucHV0IHR5cGU9Im51bWJlciIgaWQ9Im9yaWdpbmFsQW1vdW50IiBwbGFjZWhvbGRlcj0i5L6L5aaC77yaMjYuOCIgc3RlcD0iMC4wMSIgbWluPSIwIj4KICAgICAgICA8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJpbnB1dC1ncm91cCI+CiAgICAgICAgICAgIDxsYWJlbCBmb3I9InJldHVyblJhdGUiPui/lOi/mOavlOS+i++8iCXvvIk8L2xhYmVsPgogICAgICAgICAgICA8aW5wdXQgdHlwZT0ibnVtYmVyIiBpZD0icmV0dXJuUmF0ZSIgcGxhY2Vob2xkZXI9IuS+i+Wmgu+8mjUiIHN0ZXA9IjAuMDEiIG1pbj0iMCIgbWF4PSIxMDAiPgogICAgICAgIDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InJlc3VsdCI+CiAgICAgICAgICAgIDxwPui/lOi/mOmHkemine+8mjxzcGFuIGlkPSJyZXR1cm5BbW91bnQiPjAuMDA8L3NwYW4+IOWFgzwvcD4KICAgICAgICAgICAgPHA+5a6e6ZmF5pSv5LuY6YeR6aKd77yaPHNwYW4gaWQ9ImFjdHVhbFBheW1lbnQiPjAuMDA8L3NwYW4+IOWFgzwvcD4KICAgICAgICA8L2Rpdj4KICAgICAgICA8IS0tIOWPi+aDhemTvuaOpeaMiemSriAtLT4KICAgICAgICA8ZGl2IGNsYXNzPSJmcmllbmQtbGluayI+CiAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8veXktZHMubmVvY2l0aWVzLm9yZy8iIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0ibGluay1idG4iPuiuv+mXruWPi+aDhemTvuaOpTwvYT4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2PgoKICAgIDxzY3JpcHQ+CiAgICAgICAgLy8g6I635Y+WRE9N5YWD57SgCiAgICAgICAgY29uc3Qgb3JpZ2luYWxBbW91bnRJbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdvcmlnaW5hbEFtb3VudCcpOwogICAgICAgIGNvbnN0IHJldHVyblJhdGVJbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXR1cm5SYXRlJyk7CiAgICAgICAgY29uc3QgcmV0dXJuQW1vdW50U3BhbiA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXR1cm5BbW91bnQnKTsKICAgICAgICBjb25zdCBhY3R1YWxQYXltZW50U3BhbiA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdhY3R1YWxQYXltZW50Jyk7CgogICAgICAgIC8vIOiuoeeul+mAu+i+keWHveaVsAogICAgICAgIGZ1bmN0aW9uIGNhbGN1bGF0ZSgpIHsKICAgICAgICAgICAgLy8g6I635Y+W6L6T5YWl5YC877yI6buY6K6kMO+8jOmBv+WFjU5hTu+8iQogICAgICAgICAgICBjb25zdCBvcmlnaW5hbEFtb3VudCA9IHBhcnNlRmxvYXQob3JpZ2luYWxBbW91bnRJbnB1dC52YWx1ZSkgfHwgMDsKICAgICAgICAgICAgY29uc3QgcmV0dXJuUmF0ZSA9IHBhcnNlRmxvYXQocmV0dXJuUmF0ZUlucHV0LnZhbHVlKSB8fCAwOwoKICAgICAgICAgICAgLy8g5qC45b+D6K6h566X77yI6L+U6L+Y5q+U5L6L6L2s5bCP5pWw77yaJSDihpIg6Zmk5LulMTAw77yJCiAgICAgICAgICAgIGNvbnN0IHJldHVybkFtb3VudCA9IChvcmlnaW5hbEFtb3VudCAqIHJldHVyblJhdGUgLyAxMDApLnRvRml4ZWQoMik7IC8vIOS/neeVmTLkvY3lsI/mlbAKICAgICAgICAgICAgY29uc3QgYWN0dWFsUGF5bWVudCA9IChvcmlnaW5hbEFtb3VudCAtIHJldHVybkFtb3VudCkudG9GaXhlZCgyKTsKCiAgICAgICAgICAgIC8vIOabtOaWsOe7k+aenOaYvuekugogICAgICAgICAgICByZXR1cm5BbW91bnRTcGFuLnRleHRDb250ZW50ID0gcmV0dXJuQW1vdW50OwogICAgICAgICAgICBhY3R1YWxQYXltZW50U3Bhbi50ZXh0Q29udGVudCA9IGFjdHVhbFBheW1lbnQ7CiAgICAgICAgfQoKICAgICAgICAvLyDovpPlhaXmoYblj5jljJbml7blrp7ml7borqHnrpcKICAgICAgICBvcmlnaW5hbEFtb3VudElucHV0LmFkZEV2ZW50TGlzdGVuZXIoJ2lucHV0JywgY2FsY3VsYXRlKTsKICAgICAgICByZXR1cm5SYXRlSW5wdXQuYWRkRXZlbnRMaXN0ZW5lcignaW5wdXQnLCBjYWxjdWxhdGUpOwogICAgPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPgo=';
+    try {
+        const raw = decodeURIComponent(escape(atob(encoded)));
+        const iframe = document.createElement('iframe');
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        iframe.style.border = '0';
+        document.body.style.margin = '0';
+        document.body.appendChild(iframe);
+        iframe.contentDocument.open();
+        iframe.contentDocument.write(raw);
+        iframe.contentDocument.close();
+    } catch(e) {
+        document.body.innerHTML = '\u9875\u9762\u89e3\u6790\u5931\u8d25';
+        console.warn('\u52a0\u5bc6\u6e32\u67d3\u5f02\u5e38:', e);
+    }
+})();
+</script>
 </body>
 </html>
