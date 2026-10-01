@@ -1,29 +1,181 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>GitHub云笔记</title>
-<style>html,body{margin:0;padding:0;height:100%;background:#fafcff;}iframe{width:100%;height:100vh;border:none;}</style>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub云笔记 - 官方下载页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #252930, #171a1f);
+            color: #eee;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 42px;
+            color: #4ecdc4;
+            margin-bottom: 12px;
+        }
+        .header p {
+            color: #aaa;
+            font-size: 18px;
+        }
+        .card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-left: 4px solid #4ecdc4;
+            padding-left: 12px;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .feature-item {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 16px;
+            border-radius: 10px;
+        }
+        .feature-item h3 {
+            color: #4ecdc4;
+            margin-bottom: 6px;
+            font-size: 17px;
+        }
+        .feature-item p {
+            color: #c5c5c5;
+            font-size: 14px;
+        }
+        .download-box {
+            text-align: center;
+            padding: 25px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 16px 48px;
+            background: #4ecdc4;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 19px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .download-btn:hover {
+            background: #38b4ac;
+            transform: translateY(-3px);
+        }
+        .notice {
+            color: #ff9696;
+            line-height: 1.8;
+        }
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.12);
+            margin: 30px 0;
+        }
+        .tip-text{
+            margin-top:14px;
+            color:#bbbbbb;
+            font-size:14px;
+        }
+        .footer {
+            text-align: center;
+            color: #777;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-<script>
-    (function(){
-        const b64 = 'PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InpoLUNOIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+6LeR6Lev572R6aG1PC90aXRsZT4KICAgIDxzdHlsZT4KICAgICAgIAogICAgICAgIGJvZHkgewogICAgICAgICAgICAvKiDkvb/nlKjlpJrph43muJDlj5jpopzoibIgKi8KICAgICAgICAgICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCByZ2JhKDAsIDE5MSwgMjU1LCAwLjYpLCByZ2JhKDI1NSwgMCwgMCwgMC42KSksIAogICAgICAgICAgICAgICAgICAgICAgICB1cmwoJ2h0dHBzOi8vY29tbWltZy5wZGRwaWMuY29tL3VwbG9hZC9jb21tb24vbmV0d29ya19jbGVhci9hNTQzYmM1Yy1lNDExLTQ5M2UtYmZkMS1mYThkNWMyNGFiZmQuanBnJykgbm8tcmVwZWF0IGNlbnRlciBjZW50ZXI7CiAgICAgICAgICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7CiAgICAgICAgICAgIG1hcmdpbjogMDsKICAgICAgICAgICAgcGFkZGluZzogMDsKICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdOb3RvIFNhbnMgU0MnLCBzYW5zLXNlcmlmOwogICAgICAgICAgICBjb2xvcjogI2ZmZjsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsKICAgICAgICAgICAgaGVpZ2h0OiAxMDB2aDsKICAgICAgICAgICAgLyog6LCD5pW06IOM5pmv5Lqu5bqmICovCiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTsgLyog6ZmN5L2O5LiN6YCP5piO5bqm77yM5L2/6IOM5pmv5pu06Ieq54S2ICovCiAgICAgICAgfQoKICAgICAgICBoMSB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogNjBweDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnUm9ib3RvJywgc2Fucy1zZXJpZjsKICAgICAgICAgICAgdGV4dC1zaGFkb3c6IDZweCA2cHggMTJweCByZ2JhKDAsIDAsIDAsIDAuOCk7CiAgICAgICAgICAgIGxldHRlci1zcGFjaW5nOiAzcHg7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDQwcHg7CiAgICAgICAgICAgIGFuaW1hdGlvbjogbmVvbiAycyBpbmZpbml0ZSBhbHRlcm5hdGU7CiAgICAgICAgfQoKICAgICAgICBwIHsKICAgICAgICAgICAgZm9udC1zaXplOiAyNnB4OwogICAgICAgICAgICBmb250LXdlaWdodDogNDAwOwogICAgICAgICAgICB0ZXh0LXNoYWRvdzogM3B4IDNweCA2cHggcmdiYSgwLCAwLCAwLCAwLjgpOwogICAgICAgICAgICBhbmltYXRpb246IGZhZGVJbiAxcyBlYXNlLWluOwogICAgICAgICAgICBjb2xvcjogcGluazsKICAgICAgICAgICAgYW5pbWF0aW9uOiBuZW9uIDJzIGluZmluaXRlIGFsdGVybmF0ZTsKICAgICAgICB9CgogICAgICAgIC8qIOWKqOeUu+aViOaenCAqLwogICAgICAgIEBrZXlmcmFtZXMgbmVvbiB7CiAgICAgICAgICAgIGZyb20gewogICAgICAgICAgICAgICAgdGV4dC1zaGFkb3c6IDZweCA2cHggMTJweCByZ2JhKDAsIDE5MSwgMjU1LCAwLjgpOyAvKiDok53oibLpnJPombkgKi8KICAgICAgICAgICAgfQogICAgICAgICAgICB0byB7CiAgICAgICAgICAgICAgICB0ZXh0LXNoYWRvdzogNnB4IDZweCAxMnB4IHJnYmEoMjU1LCAwLCAwLCAwLjgpOyAvKiDnuqLoibLpnJPombkgKi8KICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgQGtleWZyYW1lcyBmYWRlSW4gewogICAgICAgICAgICBmcm9tIHsKICAgICAgICAgICAgICAgIG9wYWNpdHk6IDA7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgdG8gewogICAgICAgICAgICAgICAgb3BhY2l0eTogMTsKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CiAgICA8aDE+5oiR6LeR6Lev5LqG77yBPC9oMT4KICAgIDxwPuaJv+iSmeaCqOS4gOebtOS7peadpeeahOaUr+aMge+8jOWmguS7iueahOaIke+8jOW3suWcqOeUn+a0u+eahOa1qua9ruS4rea4kOa4kOWkseWOu+S6huabvue7j+eahOeIseWlveOAguabvue7j+eDreiht+S5i+S6i++8jOWmguS7iuW3suS4jeWGjeinpueisOOAguaIkeW3suS4i+WumuWGs+W/g+emu+W8gO+8jOaEv+aCqOS4h+S6i+mhuumBgu+8jOiOq+imgei+nOi0n+i/mea8q+a8q+aXtuWFieOAguiLpeaciee8mO+8jOS7luaXpeiHquS8muWGjeebuOmAouOAgjwvcD4KPC9ib2R5Pgo8L2h0bWw+';
-        try {
-            const raw = decodeURIComponent(escape(atob(b64)));
-            // 直接创建 iframe 并写入内容，完美显示
-            const iframe = document.createElement('iframe');
-            iframe.style.width = '100%';
-            iframe.style.height = '100vh';
-            iframe.style.border = 'none';
-            document.body.appendChild(iframe);
-            const doc = iframe.contentDocument || iframe.contentWindow.document;
-            doc.open();
-            doc.write(raw);
-            doc.close();
-        } catch(e) {
-            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#b91c1c;font-size:18px;background:#fee2e2;"><i class="fas fa-exclamation-triangle" style="margin-right:12px;"></i> 页面加载失败，请检查源码</div>';
-            console.warn(e);
-        }
-    })();
-</script>
+    <div class="container">
+        <!-- 头部标题 -->
+        <div class="header">
+            <h1>GitHub云笔记</h1>
+            <p>依托GitHub仓库搭建的轻量化云记事本</p>
+        </div>
+
+        <!-- 核心功能介绍 -->
+        <div class="card">
+            <h2>软件核心能力</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>多文件托管</h3>
+                    <p>支持图片、纯文本、HTML文件云端存储</p>
+                </div>
+                <div class="feature-item">
+                    <h3>HTML在线预览</h3>
+                    <p>上传网页文件可直接在线打开预览</p>
+                </div>
+                <div class="feature-item">
+                    <h3>自动混淆HTML</h3>
+                    <p>上传HTML文件自动代码混淆，保护内容</p>
+                </div>
+                <div class="feature-item">
+                    <h3>双向同步删除</h3>
+                    <p>本地删除文件，GitHub云端同步移除</p>
+                </div>
+                <div class="feature-item">
+                    <h3>无需服务器</h3>
+                    <p>仅需个人GitHub账号即可使用，零服务器成本</p>
+                </div>
+                <div class="feature-item">
+                    <h3>轻量化运行</h3>
+                    <p>占用内存极低，手机电脑均可流畅使用</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下载区域 已填入UC网盘分享链接 target="_blank"新窗口打开 -->
+        <div class="card">
+            <div class="download-box">
+                <h2>立即下载客户端</h2>
+                <br>
+                <a href="https://drive.uc.cn/s/f2a92bcd08c74?public=1" target="_blank" class="download-btn">点击下载 GitHub云笔记</a>
+                <p class="tip-text">适配安卓全版本 · UC网盘不限速下载，永久有效分享</p>
+            </div>
+        </div>
+
+        <!-- 购买/服务须知 -->
+        <div class="card">
+            <h2>服务须知</h2>
+            <div class="notice">
+                <p>1. 本项目仅提供搭建教程与工具，不出售程序源码；</p>
+                <p>2. 产品属于虚拟服务，一经交付，不支持退款；</p>
+                <p>3. 搭建全程仅依托你的个人GitHub账号，数据归你所有；</p>
+                <p>4. 所有文件同步逻辑由GitHub仓库承载，无第三方中转服务器；</p>
+                <p>5. 如遇域名、仓库访问问题，可提供全套排查步骤指导。</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 底部 -->
+        <div class="footer">
+            GitHub云笔记 · 纯静态下载页面 | 仅用于工具分发展示
+        </div>
+    </div>
 </body>
 </html>
