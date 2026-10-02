@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub云笔记</title>
+<style>body{margin:0;background:#fafcff;}</style>
+</head>
+<body>
+<script>
+(function(){
+    const encoded = '5L2g5aW9';
+    try {
+        const raw = decodeURIComponent(escape(atob(encoded)));
+        const iframe = document.createElement('iframe');
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        iframe.style.border = '0';
+        document.body.style.margin = '0';
+        document.body.appendChild(iframe);
+        iframe.contentDocument.open();
+        iframe.contentDocument.write(raw);
+        iframe.contentDocument.close();
+    } catch(e) {
+        document.body.innerHTML = '\u9875\u9762\u89e3\u6790\u5931\u8d25';
+        console.warn('\u52a0\u5bc6\u6e32\u67d3\u5f02\u5e38:', e);
+    }
+})();
+</script>
+</body>
+</html>
