@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>琉璃胶囊播放器｜点击页面空白关闭歌单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, sans-serif;
+        }
+        body {
+            background:#f7f2fa;
+            padding:16px;
+        }
+
+        /* 胶囊控件 琉璃透明 */
+        .capsule-player{
+            display:inline-flex;
+            align-items:center;
+            background:rgba(153, 102, 204, 0.65);
+            backdrop-filter: blur(10px);
+            color:#fff;
+            border-radius:999px;
+            padding:6px 8px;
+            gap:6px;
+            box-shadow: 0 3px 10px rgba(120,60,180,0.18);
+            cursor:pointer;
+        }
+        .mini-cover{
+            width:28px;
+            height:28px;
+            border-radius:50%;
+            background:#b88ed9;
+            overflow:hidden;
+        }
+        .mini-cover img{
+            width:100%;height:100%;object-fit:cover;
+        }
+        .capsule-btn{
+            font-size:14px;
+            padding:0 2px;
+            user-select:none;
+        }
+        .capsule-play{
+            width:26px;
+            height:26px;
+            border-radius:50%;
+            background:#ffffff;
+            color:#9966cc;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:13px;
+            font-weight:bold;
+            user-select:none;
+        }
+
+        /* ========== 缩小版琉璃歌单 ========== */
+        .playlist-panel{
+            margin-top:8px;
+            width:100%;
+            max-width:240px;
+            background:rgba(255, 255, 255, 0.42);
+            backdrop-filter: blur(14px);
+            border-radius:12px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.08);
+            overflow:hidden;
+            display:none;
+        }
+        .playlist-panel.show{
+            display:block;
+        }
+        .playlist-item{
+            padding:7px 12px;
+            border-bottom:1px solid rgba(240, 232, 248,0.3);
+            cursor:pointer;
+            font-size:12.5px;
+        }
+        .playlist-item.active{
+            background:rgba(153, 102, 204,0.22);
+            color:#9966cc;
+        }
+        .playlist-item:active{
+            background:rgba(153, 102, 204,0.32);
+        }
+    </style>
+</head>
+<body>
+
+<div class="capsule-player" id="capsuleBox">
+    <div class="mini-cover">
+        <img id="coverImg" src="https://picsum.photos/id/65/100/100">
+    </div>
+    <div class="capsule-btn" id="prevBtn">⏮</div>
+    <div class="capsule-play" id="playBtn">▶</div>
+    <div class="capsule-btn" id="nextBtn">⏭</div>
+</div>
+
+<!-- 缩小琉璃歌单 -->
+<div class="playlist-panel" id="playlistBox"></div>
+
+<audio id="audioPlayer">
+
+<script>
+const songList = [
+    {
+        name:"第一首演示曲",
+        url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        cover:"https://picsum.photos/id/65/100/100"
+    },
+    {
+        name:"第二首演示曲",
+        url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        cover:"https://picsum.photos/id/96/100/100"
+    },
+    {
+        name:"第三首演示曲",
+        url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+        cover:"https://picsum.photos/id/237/100/100"
+    },
+    {
+        name:"第四首演示曲",
+        url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+        cover:"https://picsum.photos/id/1025/100/100"
+    }
+];
+
+const audioPlayer = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const playlistBox = document.getElementById('playlistBox');
+const coverImg = document.getElementById('coverImg');
+const capsuleBox = document.getElementById('capsuleBox');
+
+let currentIndex = 0;
+let isPlaying = false;
+
+// 点击胶囊空白展开歌单，点按钮不触发
+capsuleBox.onclick = (e)=>{
+    if(e.target === prevBtn || e.target === playBtn || e.target === nextBtn) return;
+    playlistBox.classList.toggle('show');
+}
+
+// ✅ 新增：点击页面空白区域关闭歌单
+document.addEventListener('click', (e) => {
+    // 如果点击的不是胶囊 和 不是歌单区域，就收起菜单
+    if (!capsuleBox.contains(e.target) && !playlistBox.contains(e.target)) {
+        playlistBox.classList.remove('show');
+    }
+})
+
+function renderPlaylist(){
+    playlistBox.innerHTML = '';
+    songList.forEach((song,idx)=>{
+        const div = document.createElement('div');
+        div.className = "playlist-item "+ (idx===currentIndex?"active":"");
+        div.innerText = song.name;
+        div.dataset.index = idx;
+        div.onclick = ()=> playSong(idx);
+        playlistBox.appendChild(div);
+    })
+}
+
+function playSong(idx){
+    currentIndex = idx;
+    const song = songList[currentIndex];
+    audioPlayer.src = song.url;
+    audioPlayer.play();
+    isPlaying = true;
+    playBtn.innerText = "❙❙";
+    coverImg.src = song.cover;
+    renderPlaylist();
+}
+
+playBtn.onclick = ()=>{
+    if(isPlaying){
+        audioPlayer.pause();
+        isPlaying = false;
+        playBtn.innerText = "▶";
+    }else{
+        audioPlayer.play();
+        isPlaying = true;
+        playBtn.innerText = "❙❙";
+    }
+}
+
+prevBtn.onclick = ()=>{
+    let i = currentIndex - 1;
+    if(i < 0) i = songList.length - 1;
+    playSong(i);
+}
+
+nextBtn.onclick = ()=>{
+    let i = currentIndex + 1;
+    if(i >= songList.length) i = 0;
+    playSong(i);
+}
+
+audioPlayer.onended = ()=>{
+    let i = currentIndex + 1;
+    if(i >= songList.length) i = 0;
+    playSong(i);
+}
+
+renderPlaylist();
+</script>
+
+</body>
+</html>
